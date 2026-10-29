@@ -1,0 +1,26 @@
+ingestion_agent:
+  max_retries: 3
+  timeout_seconds: 30
+  tools:
+    - api_fetch
+    - file_read
+
+processing_agent:
+  max_retries: 2
+  timeout_seconds: 60
+  tools:
+    - db_query
+    - transform
+
+reporting_agent:
+  max_retries: 1
+  timeout_seconds: 15
+  tools:
+    - email_send
+    - db_write
+
+memory:
+  vector_store: pinecone
+  index_name: agent-memory
+  embedding_model: text-embedding-3-small
+  top_k: 5
